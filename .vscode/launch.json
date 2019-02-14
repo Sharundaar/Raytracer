@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "clr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/bin/Debug/Raytracer.exe",
+            "cwd": "${workspaceFolder}",
+            "args":[],
+            "console": "internalConsole",
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+    ]
+}
