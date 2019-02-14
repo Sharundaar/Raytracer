@@ -21,8 +21,8 @@ float4 VS( VS_IN input ) : SV_Position
 }
 
 #define MAX_STEPS 100
-#define MAX_DIST 100.
-#define SURF_DIST .001
+#define MAX_DIST 10000.
+#define SURF_DIST .01
 #define L2Pos float3(0, 2, 10.)
 
 float dfSphere( float3 p, float radius )
@@ -93,6 +93,8 @@ float GetDist(float3 p) {
 	float d = MAX_DIST;
 
     // d = min( d, SphereCapsThingy( p ) );
+
+    /*
     d = min( d, dfBox( p-float3(0, 1, 0), float3( 1, 1, 1 ) ) );
     d = min( d, dfPlane( p - float3(-4., 0., 0.), normalize( float4(1,1,0,sin(iTime)) ) ) );
     float3 sCenter = float3(4., 1., 5.);
@@ -103,8 +105,14 @@ float GetDist(float3 p) {
                         dfSphere( p-sCenter, 2. ), 
                         0.2 ), 
                     .1 ), .05 ) ) );
-	d = min( d, p.y );
+	c
     d = max( d, -dfSphere( p-CameraPos, 3. ) );
+    */
+
+    float3 c = float3(2., 2.+sin(iTime), 2.);
+    float3 q = abs(fmod(p,c))-0.5*c;
+    d = min( d, dfSphere( q, 0.1 ));
+    d = min( d, p.y );
 
     return d;
 }
